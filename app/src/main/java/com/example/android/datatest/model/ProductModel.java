@@ -8,7 +8,7 @@ public class ProductModel
 
     private String name;
     private boolean isBulk;
-    private float quantity;
+    private String quantity;
 
 
     private float priceICA;
@@ -37,12 +37,12 @@ public class ProductModel
         this.priceCoop = priceCoop;
         }
 
-    public float getQuantity()
+    public String getQuantity()
         {
         return quantity;
         }
 
-    public void setQuantity(float quantity)
+    public void setQuantity(String quantity)
         {
         this.quantity = quantity;
         }

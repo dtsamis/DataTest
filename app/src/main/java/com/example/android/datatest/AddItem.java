@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddItem extends AppCompatActivity
     {
-    ProductModel item;
+    ProductModel item=new ProductModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,12 +32,12 @@ public class AddItem extends AppCompatActivity
         {
             DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
 
-            String ID,category,subcategory,name;
-            float quantity,priceICA,priceWillys,priceCoop;
-            boolean isBulk;
+            String ID,category,quantity,subcategory,name;
+            float priceICA,priceWillys,priceCoop;
+            //boolean isBulk;
 
 
-            item =new ProductModel();
+
 
         EditText inputID,inputCategory,inputSubcategory,inputName,inputQuantity,inputPriceICA,inputPriceWillys,inputPriceCoop;
         //RadioButton yesBulk,noBulk;
@@ -52,10 +52,26 @@ public class AddItem extends AppCompatActivity
         inputPriceCoop=findViewById(R.id.editTextCoop);
 
         ID=inputID.getText().toString();
-        
+        category=inputCategory.getText().toString();
+        subcategory=inputSubcategory.getText().toString();
+        name=inputName.getText().toString();
+        quantity=inputQuantity.getText().toString();
+        priceICA=Float.parseFloat(inputPriceICA.getText().toString());
+        priceWillys=Float.parseFloat(inputPriceWillys.getText().toString());
+        priceCoop=Float.parseFloat(inputPriceCoop.getText().toString());
 
 
 
+        item.setID(ID);
+        item.setCategory(category);
+        item.setSubCategory(subcategory);
+        item.setName(name);
+        item.setQuantity(quantity);
+        item.setPriceICA(priceICA);
+        item.setPriceWillys(priceWillys);
+        item.setPriceCoop(priceCoop);
+
+        reference.child(category).child(subcategory).child(ID).setValue(item);
 
         }
 

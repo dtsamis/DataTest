@@ -170,6 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Add to Database"
+        android:onClick="addToDatabase"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </LinearLayout>
