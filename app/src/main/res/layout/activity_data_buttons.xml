@@ -30,13 +30,15 @@
         app:layout_constraintTop_toBottomOf="@+id/button_add" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonTotals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:layout_marginBottom="236dp"
+        android:text="Show Totals"
+        android:onClick="showTotals"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -49,7 +51,7 @@
         android:layout_marginBottom="8dp"
         android:text="ID"
 
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/buttonTotals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_show" />
@@ -71,4 +73,75 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_show" />
+
+    <TextView
+        android:id="@+id/textViewICA"
+        android:layout_width="100sp"
+        android:layout_height="30sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="ICA"
+        app:layout_constraintEnd_toStartOf="@+id/textViewWillys"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTotals" />
+
+    <TextView
+        android:id="@+id/textViewWillys"
+        android:layout_width="100sp"
+        android:layout_height="30sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="45dp"
+        android:gravity="center"
+        android:text="WILLYS"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCoop"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTotals" />
+
+    <TextView
+        android:id="@+id/textViewCoop"
+        android:layout_width="100sp"
+        android:layout_height="30sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="COOP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTotals" />
+
+    <TextView
+        android:id="@+id/textViewICAtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/textViewWILLYStotal"
+        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewICA" />
+
+    <TextView
+        android:id="@+id/textViewWILLYStotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/textViewCOOPtotal"
+        app:layout_constraintHorizontal_bias="0.658"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWillys" />
+
+    <TextView
+        android:id="@+id/textViewCOOPtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="40dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCoop" />
 </android.support.constraint.ConstraintLayout>

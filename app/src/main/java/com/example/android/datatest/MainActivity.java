@@ -41,9 +41,10 @@ mAuth=FirebaseAuth.getInstance();
 if (mAuth.getCurrentUser()!=null){
     startActivity(new Intent(getApplicationContext(),DataButtons.class));
 }
-
+btnSignIn=findViewById(R.id.btnsignin);
 btnSignUp=findViewById(R.id.btnsignup);
-
+email=findViewById(R.id.email_login);
+password=findViewById(R.id.password_login);
 
 //for sign up page
 btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -61,5 +62,43 @@ startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
 
 public void signIn(View view)
     {
+    btnSignIn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+    String mEmail=email.getText().toString().trim();
+    String mPass=password.getText().toString().trim();
+
+    if (TextUtils.isEmpty(mEmail)){
+        email.setError("Required Field..");
+        return;
+    }
+    if (TextUtils.isEmpty(mPass)){
+        password.setError("Required Field..");
+        return;
+    }
+
+    mDialog.setMessage("Processing..");
+    mDialog.show();
+
+    mAuth.signInWithEmailAndPassword(mEmail,mPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    @Override
+    public void onComplete(@NonNull Task<AuthResult> task) {
+    if (task.isSuccessful()){
+        mDialog.dismiss();
+        startActivity(new Intent(getApplicationContext(), DataButtons.class));
+
+        Toast.makeText(getApplicationContext(),"Login Complete",Toast.LENGTH_SHORT).show();
+    }else {
+        Toast.makeText(getApplicationContext(),"Problem..",Toast.LENGTH_SHORT).show();
+
+    }
+    }
+    });
+
+
+
+    }
+    });
     }
 }

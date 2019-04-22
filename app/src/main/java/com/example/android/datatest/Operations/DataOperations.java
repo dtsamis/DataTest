@@ -1,6 +1,7 @@
 package com.example.android.datatest.Operations;
 
 
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,20 +22,30 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 public class DataOperations
     {
 
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference reference;
+
+    public ArrayList<ProductModel> getProducts()
+        {
+        return products;
+        }
+
+    public ArrayList<ProductModel> products=new ArrayList<>();
+    ArrayList<String> categories=new ArrayList<>();
+    ArrayList<String> subcategories =new ArrayList<>();
+    ArrayList<String> idents=new ArrayList<>();
+    //ArrayList<ProductModel> items=new ArrayList<>();
   /*  public  ArrayList<ProductModel> getItems()
         {
         return items;
         }
 
-    //ArrayList<ProductModel> items=new ArrayList<>();
+
 
     public ArrayList<String> getCategories()
         {
         return categories;
 
         }*/
-
 
 
 
@@ -47,7 +58,7 @@ public class DataOperations
     public  float[] total(ArrayList<ProductModel> shopList)
         {
 
-        float sum[]={0f,0f,0f};
+        float sum[]={0,0,0};
         for(ProductModel product:shopList)
         {
             sum[0]+=product.getPriceICA();
@@ -58,27 +69,28 @@ public class DataOperations
         return sum;
         }
 
-
-        public  ArrayList<ProductModel> retrieveDatabase(final TextView tv)
+        public void init()
             {
-            final ArrayList<String> categories=new ArrayList<>();
-            final ArrayList<String> subcategories =new ArrayList<>();
-            final ArrayList<String> idents=new ArrayList<>();
-            final ArrayList<ProductModel> items =new ArrayList<>();
+                products=new ArrayList<>();
+            }
 
-            reference.addValueEventListener(new ValueEventListener() {
+
+        public  void retrieveDatabase()
+            {
+            reference = FirebaseDatabase.getInstance().getReference();
+            //init();
+            reference.addValueEventListener(new ValueEventListener()
+                {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
                 {
-                //String category = dataSnapshot.getKey();
-                //if(category)
-                // tv.setText("Root");
-                // else
-                //tv.setText(category);
 
-                for (DataSnapshot ds1 : dataSnapshot.getChildren()) {
+
+                for (DataSnapshot ds1 : dataSnapshot.getChildren())
+                {
                     String category = ds1.getKey();
                     categories.add(category);
+
                 }
 
 
@@ -89,36 +101,24 @@ public class DataOperations
                     for (DataSnapshot ds2 : dataSnapshot.child(cat).getChildren()) {
                         String subcategory = ds2.getKey();
                         subcategories.add(subcategory);
+
                     }
                 }
+
                 for (String cat : categories) {
                     for (String subcat : subcategories) {
 
                         for (DataSnapshot ds3 : dataSnapshot.child(cat).child(subcat).getChildren()) {
                             String id = ds3.getKey();
+                            ProductModel product =ds3.getValue(ProductModel.class);
 
-                            idents.add(id);
+                            products.add(product);
+                            //Log.i("Product Name:",products.get(products.size()-1).getName());
+
                         }
                     }
                 }
 
-              for (String cat:categories) {
-                    for (String subcat:subcategories) {
-                        for (String ident : idents)
-
-                            {
-
-                                DataSnapshot ds4=dataSnapshot.child(cat).child(subcat).child(ident);
-                                    ProductModel product = ds4.getValue(ProductModel.class);
-                                    items.add(product);
-                                    tv.setText(items.get(0).getName()+" "+items.get(0).getCategory());
-
-
-                            }
-                        }
-
-
-                    }
 
                 }
 
@@ -137,10 +137,10 @@ public class DataOperations
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-            //Toast.makeText("Error with database",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Error with database",Toast.LENGTH_SHORT).show();
             }
             });
-return items;
+
             }
 
 
